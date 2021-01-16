@@ -1,0 +1,22 @@
+class Solution{
+    public:
+    int lenOfLongSubarr(int A[],  int N, int K) 
+    {
+        unordered_map <int, int> m;
+        int sum = 0, maxLen = 0;
+        
+        for(int i = 0; i < N; i++)
+        {
+            sum += A[i];
+            if(sum == K)
+                maxLen = i + 1;
+            if(m.count(sum - K))
+                maxLen = max(maxLen, i - m[sum - K]);
+            if(!m.count(sum)) // store 1st occurence of an element
+                m[sum] = i;
+        } 
+        
+        return maxLen;
+    } 
+
+};

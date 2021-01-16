@@ -1,0 +1,23 @@
+// largest-subarray-with-0-sum
+int maxLen(int A[], int n)
+{
+    unordered_map<int,int>m;// stores index of 1st occurence of prefix_sum value of prefix sum array(if calculated)
+    int sum=0,Max=0;
+    for(int i=0;i<n;i++)
+    {
+        sum+=A[i];
+        if(A[i]==0)
+            Max=max(Max,1);
+            
+        if(sum==0)
+            Max=i+1;
+        
+        if(m.count(sum))
+            Max=max(Max,i-m[sum]);
+        else
+            m[sum]=i;
+    }
+    return Max;
+}
+
+// we want to store 1st occurrence of an element to maximize the length of subarray
