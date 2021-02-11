@@ -1,0 +1,36 @@
+#include<bits/stdc++.h>
+ 
+using namespace std;
+ 
+map <string, vector <string> > adj;
+map <string, bool> vis;
+int depth = 0;
+ 
+void dfs(string node, int h)
+{
+    vis[node] = true;
+    for(auto child : adj[node])
+    {
+        if(vis[child] == false)
+            dfs(child, h+1);
+    }
+    depth = max(depth, h);
+}
+ 
+int main()
+{
+    int n;
+    cin >> n;
+    while(n--)
+    {
+        string s1, t, s2;
+        cin >> s1 >> t >> s2;
+        transform(s1.begin(), s1.end(), s1.begin(), ::tolower);
+        transform(s2.begin(), s2.end(), s2.begin(), ::tolower);
+        adj[s2].push_back(s1);
+    }
+    string src = "polycarp";
+    dfs(src, 1);
+    cout << depth;
+    return 0;
+}

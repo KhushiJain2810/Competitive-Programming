@@ -1,0 +1,24 @@
+class Solution{
+public:
+    int countBits(int N, long long int A[])
+    {
+        int mod = 1e9 + 7, ans = 0;;
+        vector <int> v(32);
+        
+        for(int i = 0; i < N; i++)
+        {
+            int j = 0;
+            long long int x = A[i];
+            while(x && j < 32)
+            {
+                if(x & 1)
+                    v[j]++;
+                j++;
+                x = x >> 1;
+            }
+        } 
+        for(int i = 0; i < 32; i++)
+            ans = (ans % mod + ( v[i] *(N-v[i]) * 2 ) % mod ) % mod;
+        return ans;
+    }
+};

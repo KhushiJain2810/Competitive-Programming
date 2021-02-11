@@ -1,0 +1,14 @@
+class Solution {
+public:
+    int hammingDistance(int x, int y) {
+     
+        int xoro = x ^ y;
+        int c = 0;
+        while(xoro)
+        {
+            c++;
+            xoro &= (xoro-1); // unsets the rightmost bit
+        } // so when all the set bits become 0(unset) we come out of the loop
+        return c;
+    }
+};

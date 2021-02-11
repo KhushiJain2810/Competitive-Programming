@@ -1,0 +1,24 @@
+class Solution {
+public:
+    vector<int> singleNumber(vector<int>& nums) {
+        
+        long long int xoro = 0;
+        for(auto c : nums)
+            xoro ^= c; 
+        
+        // xoro contains xor of 2 unique elements
+        long long int LSB = xoro & ((~ xoro) + 1); 
+        // Calculate rightmost set bit
+        // This means that the rightmost bit at which x and y differ is the bit where value is LSB
+        // Now partition the array on the basis of this bit
+        int x = 0, y = 0;
+        for(auto c : nums)
+        {
+            if(c & LSB) // set bit
+                x ^= c;
+            else
+                y ^= c;
+        }
+        return {x, y};
+    }
+};
